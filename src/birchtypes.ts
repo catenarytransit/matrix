@@ -228,25 +228,6 @@ export interface Direction {
     trips: Trip[]
 }
 
-export interface Trip {
-    trip_id: string
-    gtfs_frequency_start_time: string | null
-    gtfs_schedule_start_day: string
-    is_frequency: boolean
-    departure_schedule: number | null
-    departure_realtime: number | null
-    arrival_schedule: number | null
-    arrival_realtime: number | null
-    stop_id: string
-    trip_short_name: string
-    tz: string
-    is_interpolated: boolean
-    cancelled: boolean
-    deleted: boolean
-    platform: string | null
-    level_id: string | null
-}
-
 export interface Stop {
     gtfs_id: string
     name: string

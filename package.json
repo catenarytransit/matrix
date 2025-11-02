@@ -9,6 +9,9 @@
   "devDependencies": {
     "@types/bun": "latest"
   },
+  "bin": {
+    "catenary-matrix": "src/main.tsx"
+  },
   "peerDependencies": {
     "typescript": "^5"
   },
