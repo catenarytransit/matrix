@@ -10,7 +10,7 @@ import type {
     Direction,
     Trip,
 } from "./birchtypes.ts"
-import type { SearchResultResponse } from "./searchtypes.ts"
+import type { SearchResultResponse } from "./birchtypes.ts"
 
 const BIRCH = "https://birch.catenarymaps.org"
 
