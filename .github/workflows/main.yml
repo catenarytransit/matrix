@@ -1,4 +1,4 @@
-name: Build and Release (Bun)
+name: Build and Pre-Release (Bun)
 
 on:
   push:
@@ -38,8 +38,8 @@ jobs:
           name: matrix-${{ runner.os }}
           path: dist/matrix-${{ runner.os }}
 
-  release:
-    name: Create GitHub Release
+  prerelease:
+    name: Create GitHub Pre-Release
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -51,12 +51,16 @@ jobs:
       - name: List downloaded artifacts
         run: ls -R ./artifacts
 
-      - name: Create Release
-        id: create_release
+      - name: Get short commit hash
+        id: vars
+        run: echo "short_sha=${GITHUB_SHA::8}" >> $GITHUB_OUTPUT
+
+      - name: Create Pre-Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
+          tag_name: prerelease-${{ steps.vars.outputs.short_sha }}
+          name: "Pre-Release ${{ steps.vars.outputs.short_sha }}"
+          prerelease: true
           files: ./artifacts/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
