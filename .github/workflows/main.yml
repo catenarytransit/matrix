@@ -27,13 +27,16 @@ jobs:
         run: bun install
 
       - name: Build project
-        run: bun build --compile --minify --sourcemap ./src/main.tsx --outfile matrix
+        run: |
+          mkdir -p dist
+          bun build --compile --minify --sourcemap ./src/main.tsx --outfile dist/matrix-${{ runner.os }}
+          ls -lah dist
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: matrix-${{ matrix.os }}
-          path: matrix
+          name: matrix-${{ runner.os }}
+          path: dist/matrix-${{ runner.os }}
 
   release:
     name: Create GitHub Release
@@ -44,6 +47,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: ./artifacts
+
+      - name: List downloaded artifacts
+        run: ls -R ./artifacts
 
       - name: Create Release
         id: create_release
