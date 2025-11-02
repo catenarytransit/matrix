@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --watch src/main.tsx",
+    "dev": "bun run --watch src/main.tsx"
   },
   "devDependencies": {
     "@types/bun": "latest"
